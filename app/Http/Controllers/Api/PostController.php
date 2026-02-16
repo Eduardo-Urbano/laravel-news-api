@@ -8,9 +8,11 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
     
     public function index(Request $request)
     {
@@ -50,9 +52,7 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        if ($request->user()->id !== $post->user_id) {
-            return response()->json(['message' => 'Não autorizado'], 403);
-        }
+        $this->authorize('update', $post);
 
         $post->update($request->validated());
 
@@ -61,9 +61,7 @@ class PostController extends Controller
 
     public function destroy(Request $request, Post $post)
     {
-        if ($request->user()->id !== $post->user_id) {
-            return response()->json(['message' => 'Não autorizado'], 403);
-        }
+        $this->authorize('delete', $post);
 
         $post->delete();
 

@@ -9,7 +9,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('posts')->paginate(10);
+
         return view('categories.index', compact('categories'));
     }
 
@@ -26,8 +27,7 @@ class CategoryController extends Controller
 
         Category::create($request->all());
 
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria criada com sucesso!');
+        return redirect()->route('categories.index')->with('success', 'Categoria criada com sucesso!');
     }
 
     public function edit(Category $category)
@@ -43,15 +43,13 @@ class CategoryController extends Controller
 
         $category->update($request->all());
 
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria atualizada com sucesso!');
+        return redirect()->route('categories.index')->with('success', 'Categoria atualizada com sucesso!');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria deletada com sucesso!');
+        return redirect()->route('categories.index')->with('success', 'Categoria deletada com sucesso!');
     }
 }

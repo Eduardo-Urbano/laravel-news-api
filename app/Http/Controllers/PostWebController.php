@@ -3,29 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 use App\Models\Category;
 
 class PostWebController extends Controller
 {
-    public function index(Request $request)
+    use AuthorizesRequests;
+
+    public function index()
     {
-        $query = Post::with(['category', 'user'])
-            ->latest();
-
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
-        }
-
-        if ($request->filled('title')) {
-            $query->where('title', 'like', '%' . $request->title . '%');
-        }
-
-        $posts = $query->paginate(5)->withQueryString();
+        $posts = Post::with(['category', 'user'])
+                    ->latest()
+                    ->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
@@ -56,15 +49,15 @@ class PostWebController extends Controller
 
     public function edit(Post $post)
     {
-        // Policy: só o dono pode editar
         $this->authorize('update', $post);
 
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        // Policy: só o dono pode atualizar
         $this->authorize('update', $post);
 
         $post->update($request->validated());
@@ -74,7 +67,6 @@ class PostWebController extends Controller
 
     public function destroy(Post $post)
     {
-        // Policy: só o dono pode deletar
         $this->authorize('delete', $post);
 
         $post->delete();

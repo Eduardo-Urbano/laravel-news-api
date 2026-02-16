@@ -9,18 +9,41 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
-                        {{ __('Perfil') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        {{ __('Posts') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                        {{ __('Categorias') }}
-                    </x-nav-link>
+                    {{-- Dashboard --}}
+                    <a href="{{ route('dashboard') }}"
+                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                    {{ request()->routeIs('dashboard')
+                            ? 'border-indigo-400 text-gray-900 dark:text-white'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200' }}">
+                        Dashboard
+                    </a>
+
+                    {{-- Perfil --}}
+                    <a href="{{ route('profile.edit') }}"
+                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                    {{ request()->routeIs('profile.edit')
+                            ? 'border-indigo-400 text-gray-900 dark:text-white'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200' }}">
+                        Perfil
+                    </a>
+
+                    {{-- Posts --}}
+                    <a href="{{ route('posts.index') }}"
+                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                    {{ request()->routeIs('posts.*')
+                            ? 'border-indigo-400 text-gray-900 dark:text-white'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200' }}">
+                        Posts
+                    </a>
+
+                    {{-- Categorias --}}
+                    <a href="{{ route('categories.index') }}"
+                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+                    {{ request()->routeIs('categories.*')
+                            ? 'border-indigo-400 text-gray-900 dark:text-white'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200' }}">
+                        Categorias
+                    </a>
                 </div>
             </div>
 
