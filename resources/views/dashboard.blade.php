@@ -8,7 +8,6 @@
             Bem-vindo ao seu painel!
         </div>
 
-    <!--Botões de ações rápidas-->
         <div class="w-full flex justify-center">
             <div class="flex flex-row gap-4 justify-center-center">
                 <a href="{{ route('posts.create') }}"
@@ -22,7 +21,6 @@
             </div>
         </div>
 
-        <!-- Postagens -->
         <div class="bg-white dark:bg-gray-800 text-white overflow-hidden shadow-sm sm:rounded-lg p-6">
             <h3 class="text-lg font-semibold mb-2">Últimas postagens</h3>
 
@@ -51,7 +49,6 @@
             </ul>
         </div>
 
-        <!-- Categorias -->
         <div class="bg-white dark:bg-gray-800 text-white overflow-hidden shadow-sm sm:rounded-lg p-6">
             <h3 class="text-lg font-semibold mb-2">Categorias</h3>
 

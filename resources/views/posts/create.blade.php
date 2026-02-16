@@ -9,7 +9,6 @@
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
 
-        {{-- Título --}}
         <div class="mb-4">
             <label for="title" class="block text-sm font-medium mb-1">
                 Título
@@ -41,7 +40,6 @@
             @enderror
         </div>
 
-        {{-- Conteúdo --}}
         <div class="mb-4">
             <label for="content" class="block text-sm font-medium mb-1">
                 Conteúdo
@@ -59,7 +57,6 @@
             @enderror
         </div>
 
-        {{-- Categoria --}}
         <div class="mb-4">
             <label for="category_id" class="block text-sm font-medium mb-1">
                 Categoria

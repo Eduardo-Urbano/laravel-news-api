@@ -10,7 +10,6 @@
         @csrf
         @method('PUT')
 
-        {{-- Título --}}
         <div class="mb-4">
             <label for="title" class="block text-sm font-medium mb-1">
                 Título
@@ -29,7 +28,6 @@
             @enderror
         </div>
 
-        {{-- Conteúdo --}}
         <div class="mb-4">
             <label for="content" class="block text-sm font-medium mb-1">
                 Conteúdo
@@ -47,7 +45,6 @@
             @enderror
         </div>
 
-        {{-- Categoria --}}
         <div class="mb-4">
             <label for="category_id" class="block text-sm font-medium mb-1">
                 Categoria
@@ -74,7 +71,6 @@
             @enderror
         </div>
 
-        {{-- Ações --}}
         <div class="flex justify-end space-x-2">
             <a href="{{ route('posts.index') }}"
                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
