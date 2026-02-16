@@ -28,6 +28,19 @@
             @enderror
         </div>
 
+        <div class="mb-4">
+            <label for="summary" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Resumo
+            </label>
+
+            <textarea name="summary" id="summary" rows="3"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('summary') }}</textarea>
+
+            @error('summary')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
         {{-- Conteúdo --}}
         <div class="mb-4">
             <label for="content" class="block text-sm font-medium mb-1">

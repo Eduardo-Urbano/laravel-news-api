@@ -32,13 +32,15 @@ class PostWebController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'category_id' => 'required|exists:categories,id'
+            'title' => 'required|string|max:255',
+            'summary' => 'required|string|max:500',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $post = new Post();
         $post->title = $request->title;
+        $post->summary = $request->summary;
         $post->content = $request->content;
         $post->category_id = $request->category_id;
         $post->user_id = auth()->id();
