@@ -1,57 +1,100 @@
 # Laravel News API
 
-Aplicação desenvolvida em Laravel que fornece uma API REST e uma interface web para gerenciamento de usuários, categorias e postagens de notícias, com autenticação via Laravel Sanctum.
+Aplicação desenvolvida em Laravel que disponibiliza uma API REST autenticada e uma interface web para gerenciamento de usuários, categorias e postagens de notícias.
 
-## Tecnologias utilizadas
+O projeto foi estruturado com separação clara entre camada de API e camada web, utilizando autenticação via Laravel Sanctum, Policies para autorização e boas práticas de organização de código.
+
+---
+
+## Tecnologias Utilizadas
 
 - PHP 8.2
-- Laravel
+- Laravel 10+
 - Laravel Sanctum
-- SQLite
-- Blade (views web)
+- SQLite (configuração padrão)
+- Blade (interface web)
+
+---
 
 ## Funcionalidades
 
-### API
+### API REST
 
-- Cadastro e login de usuários
+- Registro e login de usuários
 - Autenticação via Bearer Token (Sanctum)
-- CRUD de categorias
-- CRUD de postagens
-- Paginação e filtros
-- Policies para controle de autorização
-- Command Artisan para atualização em massa de títulos
+- CRUD completo de categorias
+- CRUD completo de postagens
+- Paginação automática
+- Filtros por título e categoria
+- Policies para controle de autorização (somente o autor pode editar ou excluir)
+- Comando Artisan para atualização em massa de títulos
 
-### Web
+### Interface Web
 
 - Autenticação de usuários
-- Listagem de postagens
-- Criação, edição e exclusão de postagens
+- Listagem paginada de postagens
+- CRUD completo de postagens
+- CRUD completo de categorias
+- Confirmação antes de exclusão
 - Autorização baseada no usuário autenticado
+
+---
+
 ## Instalação
 
+Clone o repositório:
+
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/Eduardo-Urbano/laravel-news-api.git
 cd laravel-news-api
+```
+
+## Instale as dependências:
+
+```bash
 composer install
+```
+
+## Configure o ambiente:
+
+```bash
 cp .env.example .env
 php artisan key:generate
+```
+
+## Execute as migrations e seeders:
+
+```bash
 php artisan migrate --seed
+```
+
+## Inicie o servidor:
+
+```bash
 php artisan serve
 ```
-A aplicação ficará disponível em:
+
+A aplicação estará disponível em:
+
 ```bash
 http://127.0.0.1:8000
-```  
+```
+
+---
 
 ## Autenticação da API
-A API utiliza autenticação via Laravel Sanctum (Bearer Token).
 
-### Registrar usuário
+A API utiliza Laravel Sanctum com autenticação via Bearer Token.
+
+### Registro de usuário
+
+```http
 POST /api/register
+```
 
-```bash
 Body:
+
+```json
 {
   "name": "Usuario",
   "email": "user@test.com",
@@ -60,46 +103,46 @@ Body:
 }
 ```
 
+---
+
 ### Login
+
+```http
 POST /api/login
+```
+Retorna um token que deve ser enviado no header das requisições autenticadas:
+```http
+Authorization: Bearer {token}
+```
 
-Retorna um token Bearer para autenticação.
-
-### Logout
-POST /api/logout
-Auth: Bearer Token
+---
 
 ### Usuário autenticado
+
+```http
 GET /api/me
-Auth: Bearer Token
+```
+Requer autenticação via Bearer Token.
 
-### Categorias (Auth obrigatório)
-
-GET    /api/categories  
-POST   /api/categories  
-PUT    /api/categories/{id}  
-DELETE /api/categories/{id}
+---
 
 ## Postagens
 
-### Listar postagens
+Listar postagens:
+```http
 GET /api/posts
-
-Paginação automática.
-
-Filtro opcional:
-
-```bash
+```
+Filtros opcionais:
+```http
 /api/posts?category_id=1
 /api/posts?title=exemplo
 ```
-
-### Criar postagem
+Criar postagem (Autenticado):
+```http
 POST /api/posts
-Auth: Bearer Token
-
+```
 Body:
-```bash
+```json
 {
   "title": "Título",
   "summary": "Resumo",
@@ -108,19 +151,21 @@ Body:
 }
 ```
 
-### Command Artisan
-Comando para atualizar o título de todas as postagens:
+---
 
+### Command Artisan
+Atualiza o título de todas as postagens:
 ```bash
 php artisan posts:update-title "Novo título"
 ```
 
-## Observações
-- O projeto utiliza Policies para garantir que apenas o autor da postagem possa editá-la ou removê-la.
+---
 
-- A API e a interface web compartilham a mesma base de dados.
-
-- Seeders estão disponíveis para usuários, categorias e postagens.
-
-## Consideração final
-Este projeto foi desenvolvido com foco em boas práticas, organização de código e separação de responsabilidades, visando um cenário real de uso em aplicações Laravel.
+### Estrutura e Boas Práticas
+- Uso de Form Requests para validação de dados
+- Policies para controle de autorização
+- Paginação nas listagens
+- Separação entre controllers da API e controllers web
+- Uso de eager loading para evitar problemas de N+1
+- Seeders para popular o banco de dados
+- Rotas organizadas por middleware de autenticação
