@@ -13,7 +13,10 @@ Route::get('/', function () {
 });
 
 Route::get('/health', function () {
-    return response('OK', 200);
+    return response()->json([
+        'status' => 'ok',
+        'service' => 'NewsFlow API'
+    ], 200);
 });
 
 Route::middleware('auth')->group(function () {
