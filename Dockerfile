@@ -15,11 +15,13 @@ RUN composer install --no-dev --optimize-autoloader
 RUN npm install
 RUN npm run build
 
+RUN php artisan l5-swagger:generate
+
 RUN touch database/database.sqlite
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database /var/www/html/public
 
-RUN chmod -R 775 storage bootstrap/cache database
+RUN chmod -R 775 storage bootstrap/cache database public
 
 RUN a2enmod rewrite
 
