@@ -8,9 +8,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use OpenApi\Attributes as OA;
 
+#[OA\Tag(
+    name: "Perfil",
+    description: "Endpoints relacionados ao gerenciamento de perfil do usuário autenticado"
+)]
 class ProfileController extends Controller
 {
+    #[OA\Get(
+        path: "/profile",
+        summary: "Exibe a página de edição de perfil",
+        tags: ["Perfil"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Página de perfil carregada com sucesso"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Não autenticado"
+            )
+        ]
+    )]
     public function edit(Request $request)
     {
         return view('profile.edit', [
@@ -18,6 +38,25 @@ class ProfileController extends Controller
         ]);
     }
 
+    #[OA\Patch(
+        path: "/profile",
+        summary: "Atualiza os dados do perfil do usuário autenticado",
+        tags: ["Perfil"],
+        responses: [
+            new OA\Response(
+                response: 302,
+                description: "Perfil atualizado com sucesso"
+            ),
+            new OA\Response(
+                response: 422,
+                description: "Dados inválidos"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Não autenticado"
+            )
+        ]
+    )]
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
@@ -35,6 +74,21 @@ class ProfileController extends Controller
             ->with('status', 'profile-updated');
     }
 
+    #[OA\Delete(
+        path: "/profile",
+        summary: "Deleta a conta do usuário autenticado",
+        tags: ["Perfil"],
+        responses: [
+            new OA\Response(
+                response: 302,
+                description: "Conta deletada com sucesso"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Não autenticado"
+            )
+        ]
+    )]
     public function destroy(Request $request): RedirectResponse
     {
         $user = $request->user();

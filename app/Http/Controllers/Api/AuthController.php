@@ -6,9 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use OpenApi\Attributes as OA;
 
+#[OA\Tag(
+    name: "Autenticação",
+    description: "Endpoints relacionados ao registro, login e logout de usuários"
+)]
 class AuthController extends Controller
 {
+    #[OA\Post(
+        path: "/api/register",
+        summary: "Cadastra um novo usuário",
+        tags: ["Autenticação"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Usuário cadastrado com sucesso"
+            ),
+            new OA\Response(
+                response: 422,
+                description: "Dados inválidos"
+            )
+        ]
+    )]
     public function register(Request $request)
     {
         $data = $request->validate([
@@ -31,6 +51,21 @@ class AuthController extends Controller
         ]);
     }
 
+    #[OA\Post(
+        path: "/api/login",
+        summary: "Realiza login do usuário e retorna token de autenticação",
+        tags: ["Autenticação"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Login realizado com sucesso"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Credenciais inválidas"
+            )
+        ]
+    )]
     public function login(Request $request)
     {
         $request->validate([
@@ -54,6 +89,21 @@ class AuthController extends Controller
         ]);
     }
 
+    #[OA\Post(
+        path: "/api/logout",
+        summary: "Realiza logout do usuário autenticado",
+        tags: ["Autenticação"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Logout realizado com sucesso"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Não autenticado"
+            )
+        ]
+    )]
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

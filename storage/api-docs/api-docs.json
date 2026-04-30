@@ -1,0 +1,811 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NewsFlow API",
+        "description": "Documentação oficial da API NewsFlow",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Cadastra um novo usuário",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
+                "responses": {
+                    "200": {
+                        "description": "Usuário cadastrado com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Realiza login do usuário e retorna token de autenticação",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso"
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Realiza logout do usuário autenticado",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Logout realizado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Lista todas as categorias",
+                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "responses": {
+                    "200": {
+                        "description": "Categorias listadas com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Cria uma nova categoria",
+                "operationId": "cca49a87d9b0ebb9a98ad7c154b71737",
+                "responses": {
+                    "201": {
+                        "description": "Categoria criada com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Exibe uma categoria específica",
+                "operationId": "09767bb2e47dde77dd1e2591428b0ae1",
+                "responses": {
+                    "200": {
+                        "description": "Categoria encontrada com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Atualiza uma categoria existente",
+                "operationId": "7dcf71887e585de7f881e9eb98d86126",
+                "responses": {
+                    "200": {
+                        "description": "Categoria atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Remove uma categoria",
+                "operationId": "9b61b65823f4a21f182506b34ddf805c",
+                "responses": {
+                    "200": {
+                        "description": "Categoria removida com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Lista posts com filtros opcionais por categoria, tag e título",
+                "operationId": "3fda362e2e082b5357ac416e7767e435",
+                "responses": {
+                    "200": {
+                        "description": "Posts listados com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Cria um novo post",
+                "operationId": "dcb66200c3132996151884ac232cf439",
+                "responses": {
+                    "201": {
+                        "description": "Post criado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Exibe um post específico com autor e categoria",
+                "operationId": "142b5adb0520cca80cedfe09d9298332",
+                "responses": {
+                    "200": {
+                        "description": "Post encontrado com sucesso"
+                    },
+                    "404": {
+                        "description": "Post não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Atualiza um post existente",
+                "operationId": "650f4bed0846d9350903d8a17c7b503a",
+                "responses": {
+                    "200": {
+                        "description": "Post atualizado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Sem permissão para atualizar este post"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Remove um post",
+                "operationId": "9d99f2e42af2f722a058a86245aa856f",
+                "responses": {
+                    "200": {
+                        "description": "Post deletado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Sem permissão para deletar este post"
+                    },
+                    "404": {
+                        "description": "Post não encontrado"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "get": {
+                "tags": [
+                    "Sessão Web"
+                ],
+                "summary": "Exibe a página de login",
+                "operationId": "d38b0625602ec8e41c3bb98aa2e969de",
+                "responses": {
+                    "200": {
+                        "description": "Página de login carregada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sessão Web"
+                ],
+                "summary": "Realiza login via sessão web",
+                "operationId": "42f77e072dec84b0e1094cca1228298e",
+                "responses": {
+                    "302": {
+                        "description": "Login realizado e redirecionamento para dashboard"
+                    },
+                    "422": {
+                        "description": "Credenciais inválidas"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Sessão Web"
+                ],
+                "summary": "Realiza logout da sessão web",
+                "operationId": "03afb12b342c2ea43bdc1de4f39e91a8",
+                "responses": {
+                    "302": {
+                        "description": "Logout realizado com sucesso"
+                    }
+                }
+            }
+        },
+        "/confirm-password": {
+            "get": {
+                "tags": [
+                    "Confirmação de Senha"
+                ],
+                "summary": "Exibe a página de confirmação de senha",
+                "operationId": "cb7fda87fdc05e9ad0ee3b000f4febaa",
+                "responses": {
+                    "200": {
+                        "description": "Página de confirmação carregada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Confirmação de Senha"
+                ],
+                "summary": "Confirma a senha do usuário autenticado",
+                "operationId": "dc62efc6d3a9c874a5c5c974e0b69df4",
+                "responses": {
+                    "302": {
+                        "description": "Senha confirmada com sucesso e redirecionamento"
+                    },
+                    "422": {
+                        "description": "Senha inválida"
+                    }
+                }
+            }
+        },
+        "/email/verification-notification": {
+            "post": {
+                "tags": [
+                    "Verificação de Email"
+                ],
+                "summary": "Envia ou reenvia o link de verificação de email para o usuário autenticado",
+                "operationId": "7c01a354a5960445207bc5d2f17d547e",
+                "responses": {
+                    "302": {
+                        "description": "Link de verificação enviado ou redirecionamento caso email já esteja verificado"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/verify-email": {
+            "get": {
+                "tags": [
+                    "Verificação de Email"
+                ],
+                "summary": "Exibe a página de verificação de email ou redireciona se já estiver verificado",
+                "operationId": "2b8625c52fabf6e7e433cf5a558e1cf2",
+                "responses": {
+                    "200": {
+                        "description": "Página de verificação exibida com sucesso"
+                    },
+                    "302": {
+                        "description": "Usuário já verificado e redirecionado"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/reset-password/{token}": {
+            "get": {
+                "tags": [
+                    "Redefinição de Senha"
+                ],
+                "summary": "Exibe a página de redefinição de senha",
+                "operationId": "139cbd7a33506f23db79a42dd3a1b825",
+                "responses": {
+                    "200": {
+                        "description": "Página de redefinição carregada com sucesso"
+                    }
+                }
+            }
+        },
+        "/reset-password": {
+            "post": {
+                "tags": [
+                    "Redefinição de Senha"
+                ],
+                "summary": "Redefine a senha do usuário com token válido",
+                "operationId": "24b1c68468bf984b8806908f211f3827",
+                "responses": {
+                    "302": {
+                        "description": "Senha redefinida com sucesso e redirecionamento para login"
+                    },
+                    "422": {
+                        "description": "Dados inválidos ou token expirado"
+                    }
+                }
+            }
+        },
+        "/password": {
+            "put": {
+                "tags": [
+                    "Senha"
+                ],
+                "summary": "Atualiza a senha do usuário autenticado",
+                "operationId": "88ac00024cf86da3e4fc35d036a874d5",
+                "responses": {
+                    "302": {
+                        "description": "Senha atualizada com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos ou senha atual incorreta"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/forgot-password": {
+            "get": {
+                "tags": [
+                    "Recuperação de Senha"
+                ],
+                "summary": "Exibe a página para solicitação de redefinição de senha",
+                "operationId": "488381143077833cec81be2e4235c339",
+                "responses": {
+                    "200": {
+                        "description": "Página de recuperação carregada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Recuperação de Senha"
+                ],
+                "summary": "Envia link de redefinição de senha para o email informado",
+                "operationId": "888e4aa5b202b170b9fe831da90048c6",
+                "responses": {
+                    "302": {
+                        "description": "Link de redefinição enviado com sucesso"
+                    },
+                    "422": {
+                        "description": "Email inválido ou não encontrado"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "get": {
+                "tags": [
+                    "Registro Web"
+                ],
+                "summary": "Exibe a página de cadastro de usuário",
+                "operationId": "711394cf638654593b284d884e4c5be4",
+                "responses": {
+                    "200": {
+                        "description": "Página de cadastro carregada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Registro Web"
+                ],
+                "summary": "Realiza o cadastro de um novo usuário via sessão web",
+                "operationId": "573de1fed352c1205a32c4d1b9877375",
+                "responses": {
+                    "302": {
+                        "description": "Usuário registrado com sucesso e redirecionado"
+                    },
+                    "422": {
+                        "description": "Dados inválidos ou email já cadastrado"
+                    }
+                }
+            }
+        },
+        "/verify-email/{id}/{hash}": {
+            "get": {
+                "tags": [
+                    "Verificação de Email"
+                ],
+                "summary": "Verifica o email do usuário através do link enviado",
+                "operationId": "9259c8d59d0ff37e9eb7677b82731d49",
+                "responses": {
+                    "302": {
+                        "description": "Email verificado com sucesso e redirecionamento"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Link inválido ou expirado"
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Lista categorias com contagem de posts",
+                "operationId": "ead5fb1cf2a7453acb2e37928a1b1eaf",
+                "responses": {
+                    "200": {
+                        "description": "Lista de categorias exibida com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Cria uma nova categoria",
+                "operationId": "bb02f0320882db37f99574196577e446",
+                "responses": {
+                    "302": {
+                        "description": "Categoria criada com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/categories/create": {
+            "get": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Exibe a página de criação de categoria",
+                "operationId": "3ef7e0bc5399e20ab25ef92f99cb0dae",
+                "responses": {
+                    "200": {
+                        "description": "Página de criação carregada com sucesso"
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Exibe uma categoria específica",
+                "operationId": "4cdf41756315109f1efc72787db5830a",
+                "responses": {
+                    "200": {
+                        "description": "Categoria exibida com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Atualiza uma categoria existente",
+                "operationId": "19954b1f8aa4916b5f032dc28ea36a24",
+                "responses": {
+                    "302": {
+                        "description": "Categoria atualizada com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Remove uma categoria",
+                "operationId": "f1b8af6e84bd52b9594d98bde748ebd6",
+                "responses": {
+                    "302": {
+                        "description": "Categoria deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            }
+        },
+        "/categories/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Categorias Web"
+                ],
+                "summary": "Exibe a página de edição de categoria",
+                "operationId": "9355eeafa7159143c390e62eacba80f7",
+                "responses": {
+                    "200": {
+                        "description": "Página de edição carregada com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            }
+        },
+        "/dashboard": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "Exibe o dashboard com posts recentes e categorias",
+                "operationId": "a92dff3ea055c0a594f425e852840a68",
+                "responses": {
+                    "200": {
+                        "description": "Dashboard carregado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "Posts Web"
+                ],
+                "summary": "Lista posts paginados no painel web",
+                "operationId": "cde581b3119bfed4f4a0ac619622cf97",
+                "responses": {
+                    "200": {
+                        "description": "Posts listados com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Posts Web"
+                ],
+                "summary": "Cria um novo post via painel web",
+                "operationId": "1affef85a1c5c202305fcb94bafa157e",
+                "responses": {
+                    "302": {
+                        "description": "Post criado com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/posts/create": {
+            "get": {
+                "tags": [
+                    "Posts Web"
+                ],
+                "summary": "Exibe a página de criação de post",
+                "operationId": "12261540b59691ed7b6683879dda7eca",
+                "responses": {
+                    "200": {
+                        "description": "Página de criação carregada com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/posts/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Posts Web"
+                ],
+                "summary": "Exibe a página de edição de um post",
+                "operationId": "4c7e3dc7fe9b1f46d97d824e6d138b7b",
+                "responses": {
+                    "200": {
+                        "description": "Página de edição carregada com sucesso"
+                    },
+                    "403": {
+                        "description": "Sem permissão"
+                    },
+                    "404": {
+                        "description": "Post não encontrado"
+                    }
+                }
+            }
+        },
+        "/posts/{id}": {
+            "put": {
+                "tags": [
+                    "Posts Web"
+                ],
+                "summary": "Atualiza um post existente via painel web",
+                "operationId": "e11abff47cfc4ec2029a65279ab9808f",
+                "responses": {
+                    "302": {
+                        "description": "Post atualizado com sucesso"
+                    },
+                    "403": {
+                        "description": "Sem permissão"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts Web"
+                ],
+                "summary": "Remove um post via painel web",
+                "operationId": "9f9e260077be9abbec62130c26817dea",
+                "responses": {
+                    "302": {
+                        "description": "Post deletado com sucesso"
+                    },
+                    "403": {
+                        "description": "Sem permissão"
+                    },
+                    "404": {
+                        "description": "Post não encontrado"
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": [
+                    "Perfil"
+                ],
+                "summary": "Exibe a página de edição de perfil",
+                "operationId": "8cfcc99d8d1aa366314cd8abf9cd9c9a",
+                "responses": {
+                    "200": {
+                        "description": "Página de perfil carregada com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Perfil"
+                ],
+                "summary": "Deleta a conta do usuário autenticado",
+                "operationId": "1d6a5c6489e35a763aa97ebef12863ce",
+                "responses": {
+                    "302": {
+                        "description": "Conta deletada com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Perfil"
+                ],
+                "summary": "Atualiza os dados do perfil do usuário autenticado",
+                "operationId": "354f5b23296bed4036564563e7423f43",
+                "responses": {
+                    "302": {
+                        "description": "Perfil atualizado com sucesso"
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Autenticação",
+            "description": "Endpoints relacionados ao registro, login e logout de usuários"
+        },
+        {
+            "name": "Categorias",
+            "description": "Endpoints relacionados ao gerenciamento de categorias"
+        },
+        {
+            "name": "Posts",
+            "description": "Endpoints relacionados ao gerenciamento, listagem, filtros e exclusão de posts"
+        },
+        {
+            "name": "Sessão Web",
+            "description": "Endpoints relacionados à autenticação via sessão web (Blade/Breeze)"
+        },
+        {
+            "name": "Confirmação de Senha",
+            "description": "Endpoints relacionados à confirmação de senha para ações sensíveis na sessão web"
+        },
+        {
+            "name": "Verificação de Email",
+            "description": "Endpoints relacionados à confirmação final de verificação de email"
+        },
+        {
+            "name": "Redefinição de Senha",
+            "description": "Endpoints relacionados à criação e redefinição de senha do usuário"
+        },
+        {
+            "name": "Senha",
+            "description": "Endpoints relacionados à atualização de senha do usuário autenticado"
+        },
+        {
+            "name": "Recuperação de Senha",
+            "description": "Endpoints relacionados à solicitação de redefinição de senha"
+        },
+        {
+            "name": "Registro Web",
+            "description": "Endpoints relacionados ao cadastro de usuários via interface web"
+        },
+        {
+            "name": "Categorias Web",
+            "description": "Endpoints relacionados ao gerenciamento de categorias via interface web"
+        },
+        {
+            "name": "Dashboard",
+            "description": "Endpoints relacionados ao painel principal da aplicação web"
+        },
+        {
+            "name": "Posts Web",
+            "description": "Endpoints relacionados ao gerenciamento de posts via interface web"
+        },
+        {
+            "name": "Perfil",
+            "description": "Endpoints relacionados ao gerenciamento de perfil do usuário autenticado"
+        }
+    ]
+}

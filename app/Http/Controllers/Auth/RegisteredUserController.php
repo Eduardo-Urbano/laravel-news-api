@@ -11,9 +11,25 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use OpenApi\Attributes as OA;
 
+#[OA\Tag(
+    name: "Registro Web",
+    description: "Endpoints relacionados ao cadastro de usuários via interface web"
+)]
 class RegisteredUserController extends Controller
 {
+    #[OA\Get(
+        path: "/register",
+        summary: "Exibe a página de cadastro de usuário",
+        tags: ["Registro Web"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Página de cadastro carregada com sucesso"
+            )
+        ]
+    )]
     public function create(): View
     {
         return view('auth.register');
@@ -22,6 +38,21 @@ class RegisteredUserController extends Controller
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[OA\Post(
+        path: "/register",
+        summary: "Realiza o cadastro de um novo usuário via sessão web",
+        tags: ["Registro Web"],
+        responses: [
+            new OA\Response(
+                response: 302,
+                description: "Usuário registrado com sucesso e redirecionado"
+            ),
+            new OA\Response(
+                response: 422,
+                description: "Dados inválidos ou email já cadastrado"
+            )
+        ]
+    )]
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

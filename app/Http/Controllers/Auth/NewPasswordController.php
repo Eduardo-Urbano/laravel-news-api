@@ -12,9 +12,25 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use OpenApi\Attributes as OA;
 
+#[OA\Tag(
+    name: "Redefinição de Senha",
+    description: "Endpoints relacionados à criação e redefinição de senha do usuário"
+)]
 class NewPasswordController extends Controller
 {
+    #[OA\Get(
+        path: "/reset-password/{token}",
+        summary: "Exibe a página de redefinição de senha",
+        tags: ["Redefinição de Senha"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Página de redefinição carregada com sucesso"
+            )
+        ]
+    )]
     public function create(Request $request): View
     {
         return view('auth.reset-password', ['request' => $request]);
@@ -23,6 +39,21 @@ class NewPasswordController extends Controller
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[OA\Post(
+        path: "/reset-password",
+        summary: "Redefine a senha do usuário com token válido",
+        tags: ["Redefinição de Senha"],
+        responses: [
+            new OA\Response(
+                response: 302,
+                description: "Senha redefinida com sucesso e redirecionamento para login"
+            ),
+            new OA\Response(
+                response: 422,
+                description: "Dados inválidos ou token expirado"
+            )
+        ]
+    )]
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

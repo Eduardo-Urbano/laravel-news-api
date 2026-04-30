@@ -15,8 +15,8 @@ Route::get('/', function () {
 Route::get('/health', function () {
     return response()->json([
         'status' => 'ok',
-        'service' => 'News Flow API'
-    ]);
+        'service' => 'NewsFlow API'
+    ], 200);
 });
 
 Route::middleware('auth')->group(function () {
