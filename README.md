@@ -65,3 +65,90 @@ A API utiliza Laravel Sanctum com Bearer Token.
 ### Registro:
 ```http
 POST /api/register
+```
+
+### Login:
+```http
+POST /api/login
+```
+
+### Header:
+```http
+Authorization: Bearer {token}
+```
+---
+
+## Documentação Swagger
+
+A documentação completa da API pode ser acessada em:
+```http
+https://newsflowapi.onrender.com/api/documentation
+```
+---
+
+## Instalação Local
+```bash
+git clone https://github.com/Eduardo-Urbano/laravel-news-api.git
+cd laravel-news-api
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm run build
+php artisan serve
+```
+
+---
+
+### Ambiente Local
+```http
+http://127.0.0.1:8000
+```
+
+---
+
+### Health Check
+```http
+GET /health
+```
+
+Resposta:
+```Json
+{
+  "status": "ok",
+  "service": "NewsFlow API"
+}
+```
+
+---
+
+## Boas Práticas Aplicadas
+- Form Requests
+- Policies
+- Sanctum
+- Swagger/OpenAPI
+- Dockerização
+- Deploy em produção
+- HTTPS forçado
+- Render Health Check
+- Eager Loading
+- Seeders
+- Separação API/Web
+
+---
+
+## Objetivo do Projeto
+
+### Desenvolvido para consolidar conhecimentos em:
+- Laravel
+- APIs REST
+- Autenticação
+- Documentação de APIs
+- Deploy real
+- Arquitetura full stack
+
+---
+
+## Licença
+MIT
