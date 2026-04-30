@@ -20,8 +20,4 @@ COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
 
-CMD CMD php artisan config:clear && \
-    php artisan route:clear && \
-    php artisan view:clear && \
-    php artisan migrate --seed --force && \
-    apache2-foreground
+CMD ["sh", "-c", "php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan migrate --seed --force && apache2-foreground"]
