@@ -12,10 +12,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'service' => 'News Flow API'
+    ]);
+});
+
 Route::middleware('auth')->group(function () {
 
     Route::resource('posts', PostWebController::class);
-    
+
     Route::resource('categories', CategoryController::class);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
