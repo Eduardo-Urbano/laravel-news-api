@@ -25,6 +25,9 @@ RUN chmod -R 775 storage bootstrap/cache database public
 
 RUN a2enmod rewrite
 
+RUN ls -la public
+RUN ls -la public/build
+
 COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
